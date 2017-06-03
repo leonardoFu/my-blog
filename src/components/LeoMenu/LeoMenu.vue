@@ -16,7 +16,7 @@
 
 <script>
 import SideBar from './SideBar.vue';
-
+import {mapGetters,mapMutations} from 'vuex';
 export default {
   name:'leo-menu',
   created:function(){
@@ -31,11 +31,18 @@ export default {
     }
   },
   computed:{
+    ...mapGetters({
+      currUser:'currUser',
+      logged:'logged'
+    })
   },
   methods:{
     toogleMenu:function(){
       this.showMenu = !this.showMenu;
-    }
+    },
+    ...mapMutations([
+      'login'
+    ])
   },
   components:{
     SideBar,
