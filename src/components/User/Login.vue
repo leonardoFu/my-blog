@@ -14,6 +14,16 @@
         <el-form-item label="密码" prop="password">
           <el-input v-model="loginForm.password" type="password"></el-input>
         </el-form-item>
+        <el-form-item v-if="showValidateCode" label="验证码" prop="validateCode">
+          <el-row>
+            <el-col :span = "17">
+              <el-input v-model="loginForm.validateCode"></el-input>
+            </el-col>
+            <el-col :span="6" :offset = "1">
+              <img :src="validateCode" height="50" @click="changeValiCode" alt="">
+            </el-col>
+          </el-row>
+        </el-form-item>
       </el-form>
       <!-- <div class="login-extralinks">
         <router-link class ="login-forget">忘记密码</router-link>
@@ -24,7 +34,7 @@
           size="large"
           @click="onSubmit" >登录</el-button>
         <el-button
-          @click="onSubmit"
+          @click="toReg"
           class="login-btn"
           size="large">立即注册</el-button>
       </div>
@@ -33,7 +43,7 @@
 
 <script>
 import $ from 'jquery';
-
+import auth from '../../../utils/auth';
 import SERVER from 'constants/server'
 export default {
   data(){
@@ -53,7 +63,9 @@ export default {
     return {
       loginForm:{
         username:'',
-        password:''
+        password:'',
+        validateCode:'',
+
       },
       rules:{
         password:[{
@@ -63,12 +75,19 @@ export default {
           validator:nameNotNull,
         }]
       },
-      submitting:false
+      submitting:false,
+      showValidateCode:false,
+      validateCode:`${SERVER}/user/valicode`
     }
+  },
+  computed:{
   },
   methods:{
     toReg:function(){
       this.$router.push("/register");
+    },
+    changeValiCode:function(){
+      this.validateCode = `${SERVER}/user/valicode?date=${new Date()}`
     },
     onSubmit:function(){
       this.$refs.loginForm.validate((valid)=>{
@@ -100,6 +119,9 @@ export default {
                   type:'error',
                   message:result.message||'登录失败'
                 })
+                if(auth.getErrTime()>2){
+                  _this.showValidateCode = true;
+                }
               }
               _this.submitting = false;
             },
