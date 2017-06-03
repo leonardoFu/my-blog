@@ -44,7 +44,8 @@
 <script>
 import $ from 'jquery';
 import auth from '../../../utils/auth';
-import SERVER from 'constants/server'
+import SERVER from 'constants/server';
+import Cookies from 'js-cookie';
 export default {
   data(){
     let nameNotNull = (rule,value,callback)=>{
@@ -60,6 +61,9 @@ export default {
       }
       callback();
     }
+    let error_time = Cookies.get('error_time');
+    let showVali = error_time>2;
+
     return {
       loginForm:{
         username:'',
@@ -76,7 +80,7 @@ export default {
         }]
       },
       submitting:false,
-      showValidateCode:false,
+      showValidateCode:showVali,
       validateCode:`${SERVER}/user/valicode`
     }
   },
