@@ -63,7 +63,7 @@
 <script>
 import $ from 'jquery';
 import SERVER from 'constants/server'
-const SUPPURT_EXT = ['jpg','png','gif'];
+const SUPPURT_EXT = ['jpg','jpeg','png','gif'];
 import Preview from '../common/Preview.vue';
 export default {
   created(){

@@ -6,6 +6,7 @@ import router from './router'
 Vue.config.productionTip = false
 import Element from './element_ui';
 import store from '../store';
+import iconfont from '@/assets/fonts/iconfont.css';
 /* eslint-disable no-new */
 var LeoWebSite = new Vue({
   el: '#app',
