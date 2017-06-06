@@ -30,7 +30,7 @@ export default {
     position:relative;
     min-height:100px;
     width:200px;
-    top:100px;
+    top:150px;
     margin:50px 15px 0 20px;
   }
 </style>

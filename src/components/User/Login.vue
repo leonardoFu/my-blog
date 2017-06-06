@@ -99,7 +99,6 @@ export default {
         let _this = this;
         if (valid) {
           this.$store.dispatch('login',this.loginForm).then((message)=>{
-            console.log(message);
             this.$message({
               type:'success',
               message,
@@ -113,6 +112,9 @@ export default {
               message:err,
               duration:1500,
             })
+            if(auth.getErrTime()>2){
+              _this.showValidateCode = true;
+            }
           }).catch((err)=>{
             throw err;
           })
@@ -166,7 +168,7 @@ export default {
 
 <style lang="css">
   .login{
-    top:180px;
+    top:100px;
   }
   .login-logo{
     display: inline-block;

@@ -84,8 +84,8 @@ export default {
   .menu-toggle>.menu-bar{
     position: absolute;
     height:4px;
-    border-radius: 3px;
     width: 80%;
+    border-radius: 3px;
     background: #000;
     transition:.25s all  ease;
   }

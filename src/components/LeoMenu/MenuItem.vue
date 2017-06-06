@@ -43,7 +43,7 @@ export default {
     top:100%;
     width:100%;
     height:0.15em;
-    background-image: linear-gradient(to right,transparent 50.3%,#7CCD7C 50.3%);
+    background-image: linear-gradient(to right,transparent 50.4%,#7CCD7C 50.3%);
     transition:background-position .4s ease;
     background-size: 200% auto;
   }

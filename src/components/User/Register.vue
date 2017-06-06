@@ -37,7 +37,7 @@
             :before-upload ="beforeUpload"
             :on-success = "uploadSuccess"
             :on-preview = "previewUpload"
-            :on-remove = "delUploaded"
+            :on-remove ="delUploaded"
             :file-list="fileList">
             <el-tooltip content="只能上传一张头像，最大：2MB" placement="bottom" >
               <el-button size="small" >点击上传</el-button>
@@ -215,11 +215,7 @@ export default {
         success:(result)=>{
           // result = result?JSON.parse(result):{};
           if(result.error_code === 200){
-            _this.$message({
-               message: '删除成功',
-               type:'success'
-            })
-            _this.fileList = [];
+            _this.fileList.splice(1,_this.fileList.length-1);
           }else{
             _this.$message({
                message: '删除失败',
