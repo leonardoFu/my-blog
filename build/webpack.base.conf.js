@@ -24,7 +24,7 @@ module.exports = {
       '@': resolve('src'),
       'api':resolve('src/assets/api'),
       'constants':resolve('src/constants'),
-      'utils':resolve('../utils')
+      'utils':resolve('src/assets/utils')
     }
   },
   module: {

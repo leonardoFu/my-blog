@@ -1,16 +1,8 @@
 import $ from 'jquery';
 import SERVER from 'constants/server';
-
+import ajax from 'utils/ajax';
 let login = (formData)=>{
-  return $.ajax({
-    url:`${SERVER}/user/login`,
-    type:'POST',
-    xhrFields: {
-      withCredentials: true
-    },
-    crossDomain:true,
-    data:formData
-  })
+  return ajax.postWithCookie(`${SERVER}/user/login`,formData);
 }
 export default {
   login

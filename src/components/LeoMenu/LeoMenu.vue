@@ -8,7 +8,7 @@
       <div class="menu-bar menu-bar-bottom">
       </div>
     </span>
-    <div v-bind:class="{ 'menu-wrap': true, 'menu-wrap-open': showMenu}">
+    <div v-bind:class="{ 'menu-wrap': true, 'menu-wrap-open animated bounceInLeft': showMenu}">
       <SideBar></SideBar>
     </div>
   </header>
@@ -57,15 +57,15 @@ export default {
   .menu-wrap{
      position:fixed;
      top:0;
-     left:-280px;
+     left:-320px;
      height:100%;
-     width:280px;
+     width:320px;
      background: #36648B;
      font-size:1em;
      transition: .25s all ease;
   }
   .menu-wrap-open{
-    left:0;
+    left:-40px;
     box-shadow: 2px 2px 15px 3px #B9ADAD;
   }
   .menu-toggle{
@@ -87,7 +87,7 @@ export default {
     width: 80%;
     border-radius: 3px;
     background: #000;
-    transition:.25s all  ease;
+    transition:.5s all  ease;
   }
   .menu-toggle-open>.menu-bar{
     background: #fff;

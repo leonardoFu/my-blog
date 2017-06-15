@@ -43,7 +43,7 @@
 
 <script>
 import $ from 'jquery';
-import auth from '../../../utils/auth';
+import auth from 'utils/auth';
 import SERVER from 'constants/server';
 import Cookies from 'js-cookie';
 export default {
@@ -118,45 +118,6 @@ export default {
           }).catch((err)=>{
             throw err;
           })
-          // $.ajax({
-          //   url:`${SERVER}/user/login`,
-          //   type:'POST',
-          //   xhrFields: {
-          //     withCredentials: true
-          //   },
-          //   crossDomain:true,
-          //   data:this.loginForm,
-          //   success:(result)=>{
-          //     result = JSON.parse(result);
-          //     if(result.error_code===200){
-          //       this.$message({
-          //         type:'success',
-          //         message:'登录成功',
-          //         duration:1500,
-          //         onClose:()=>{
-          //           this.$router.push('/')
-          //         }
-          //       })
-          //
-          //     }else{
-          //       this.$message({
-          //         type:'error',
-          //         message:result.message||'登录失败'
-          //       })
-          //       if(auth.getErrTime()>2){
-          //         _this.showValidateCode = true;
-          //       }
-          //     }
-          //     _this.submitting = false;
-          //   },
-          //   error:(err)=>{
-          //     this.$message({
-          //       type:'error',
-          //       message:'网络异常，请稍后重试'
-          //     })
-          //     _this.submitting = false;
-          //   }
-          // })
         } else {
           return false;
         }
