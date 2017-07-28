@@ -16,7 +16,7 @@
 
 <script>
 import SideBar from './SideBar.vue';
-import {mapGetters,mapMutations} from 'vuex';
+import {mapGetters, mapMutations} from 'vuex';
 export default {
   name:'leo-menu',
   created:function(){
@@ -63,6 +63,7 @@ export default {
      background: #36648B;
      font-size:1em;
      transition: .25s all ease;
+     z-index: 5;
   }
   .menu-wrap-open{
     left:-40px;

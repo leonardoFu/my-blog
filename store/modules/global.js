@@ -1,5 +1,4 @@
 import types from 'constants/mutation_types';
-import {Message} from 'element-ui';
 import userApis from 'api/user';
 import Cookies from 'js-cookie';
 
@@ -9,8 +8,8 @@ const state = {
 };
 
 const getters = {
-  currUser:state=>state.user,
-  logged:state=>state.logged
+  currUser:state => state.user,
+  logged:state => state.logged
 }
 
 const actions = {
@@ -37,8 +36,6 @@ const mutations = {
     state.user = {};
   },
   [types.LOG_IN](state,user){
-    console.log(state);
-    console.log(user);
 
     state.logged = true;
     state.user = user;

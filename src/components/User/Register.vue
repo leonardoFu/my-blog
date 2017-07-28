@@ -70,7 +70,7 @@ export default {
 
   },
   data(){
-    var validatePass2 = (rule, value, callback) => {
+    const validatePass2 = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请再次输入密码'));
       } else if (value !== this.regForm.password) {
@@ -79,31 +79,7 @@ export default {
         callback();
       }
     };
-    var validatePass = (rule, value, callback) => {
-      let reg = /^[0-9a-z_A-Z]+$/;
-      if (!value) {
-        callback(new Error('密码不能为空！'));
-      } else if (value.length>16||value.length<8) {
-        callback(new Error('密码长度为8到16位！'));
-      } else if (!reg.test(value)){
-        callback(new Error('密码只能由字母、数字和下划线组成！'));
-      }else {
-        callback();
-      }
-    };
-    let validateName = (rule,value,callback) =>{
-      let reg = /^[0-9a-z_A-Z]+$/
-      if(!value){
-        callback(new Error('用户名不能为空！'))
-      }else if(!reg.test(value)){
-        callback(new Error('用户名只能由字母、数字和下划线组成！'))
-      }else if(value.length>16){
-        callback(new Error('用户名不能超过16个字符！'))
-      } else {
-         checkNameExists(value,callback);
-      }
-    }
-    let checkNameExists = (name,callback) =>{
+    const checkNameExists = (name,callback) =>{
       let exist = false;
       $.get(`${SERVER}/user/exists?username=${name}`).then((result)=>{
         if(result.error_code ===200){
@@ -116,6 +92,31 @@ export default {
         }
       })
     }
+    const validatePass = (rule, value, callback) => {
+      let reg = /^[0-9a-z_A-Z]+$/;
+      if (!value) {
+        callback(new Error('密码不能为空！'));
+      } else if (value.length>16||value.length<8) {
+        callback(new Error('密码长度为8到16位！'));
+      } else if (!reg.test(value)){
+        callback(new Error('密码只能由字母、数字和下划线组成！'));
+      }else {
+        callback();
+      }
+    };
+    const validateName = (rule,value,callback) =>{
+      let reg = /^[0-9a-z_A-Z]+$/
+      if(!value){
+        callback(new Error('用户名不能为空！'))
+      }else if(!reg.test(value)){
+        callback(new Error('用户名只能由字母、数字和下划线组成！'))
+      }else if(value.length>16){
+        callback(new Error('用户名不能超过16个字符！'))
+      } else {
+         checkNameExists(value,callback);
+      }
+    }
+
     return {
       fileList:[],
       submitting:false,
@@ -171,8 +172,8 @@ export default {
     }
   },
   methods:{
-    uploadSuccess:function(response, file, fileList){
-      let {avatar} = this.regForm;
+    uploadSuccess:function(response){
+      // let {avatar} = this.regForm;
       this.regForm.avatar =response.data.fileId;
       this.fileList.push(response.data.file);
     },
@@ -203,7 +204,7 @@ export default {
         return false;
       }
     },
-    previewUpload:function(file){
+    previewUpload:function(){
       this.showAvatar = true;
     },
     delUploaded:function(file){
@@ -229,7 +230,7 @@ export default {
       this.submitting = true;
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          $.post(`${SERVER}/user`,this.regForm).then((result)=>{
+          $.post(`${SERVER}/user`,this.regForm).then(()=>{
             this.$message({
               showClose: true,
               message: '注册成功,3秒后跳转',

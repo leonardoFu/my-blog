@@ -13,6 +13,7 @@ export default {
         required:true,
       }
   },
+  
   methods:{
     handleClick:function(){
 

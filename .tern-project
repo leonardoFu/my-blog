@@ -15,6 +15,9 @@
       "modules": ""
     },
     "es_modules": {},
-    "commonjs": {}
+    "commonjs": {},
+    "complete_strings": {
+      "maxLength": 15
+    }
   }
 }
