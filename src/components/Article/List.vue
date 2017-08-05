@@ -57,6 +57,7 @@ export default {
         page: 1,
         clsId
       });
+      return this;
     },
     fetchClsData(){
       this.initClasses().catch((e) => {

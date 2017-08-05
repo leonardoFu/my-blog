@@ -5,7 +5,6 @@ const getList = (pageNum,classId) => {
   let params = {
     pageNum: pageNum || 1,
   }
-  console.log(classId);
   if (classId) params.classId = classId;
 
   return ajax.getWithCookie(`${SERVER}/articles/list`, params).then((result) => {
@@ -18,7 +17,14 @@ const getClasses = () => {
     return JSON.parse(result);
   })
 }
+
+const getOne = (id) => {
+  return ajax.getWithCookie(`${SERVER}/articles/article/${id}`).then((result) => {
+    return JSON.parse(result);
+  })
+}
 export default {
   getList,
-  getClasses
+  getClasses,
+  getOne
 }

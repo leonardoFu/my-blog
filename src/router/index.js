@@ -5,39 +5,50 @@ import Upload from '@/components/upload/upload.vue'
 import Register from '@/components/User/Register.vue';
 import Login from '@/components/User/Login.vue';
 import ArticleList from '@/components/Article/List.vue';
+import ArticleDetail from '@/components/Article/Detail.vue';
+import Markdown from '@/components/Demos/marked.vue';
+Vue.use(Router);
 
-Vue.use(Router)
+const routes = [
+  {
+    path:'*',
+    name:'notfound'
+  }, {
+    path: '/',
+    name: 'Hello',
+    component: Hello
+  }, {
+    path:'/upload',
+    name:'upload',
+    component:Upload
+  }, {
+    path:'/register',
+    name:'register',
+    component:Register
+  }, {
+    path:'/login',
+    name:'login',
+    component:Login
+  }, {
+    path: '/markdown',
+    name: 'markdown',
+    component: Markdown
+  }, {
+    path: '/articles',
+    name: 'articles',
+    component: ArticleList,
+    children: [
+      { path: '/articles/:id', component: ArticleList },
+    ]
+  }, {
+    path: '/article/:id',
+    name: 'article-detail',
+    component: ArticleDetail
+  },
+]
+
 export default new Router({
-  routes: [
-    {
-      path:'*',
-      name:'notfound'
-    },
-    {
-      path: '/',
-      name: 'Hello',
-      component: Hello
-    },{
-      path:'/upload',
-      name:'upload',
-      component:Upload
-    },{
-      path:'/register',
-      name:'register',
-      component:Register
-    },{
-      path:'/login',
-      name:'login',
-      component:Login
-    },{
-      path: '/articles',
-      name: 'articles',
-      component: ArticleList,
-      children: [
-        {path: '/articles/:id', component: ArticleList}
-      ]
-    }
-  ],
+  routes,
   mode: 'history',
   scrollBehavior (to, from, savedPosition) {
       // 如果你的連結是帶 # 這種

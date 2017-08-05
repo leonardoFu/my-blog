@@ -9,6 +9,7 @@
 
 <script>
 import marked from 'marked';
+
 export default {
   data(){
     return{
@@ -19,8 +20,7 @@ export default {
     compiledMarkdown: function () {
       marked.setOptions({
         highlight: function (code) {
-          console.log(require('highlight.js').highlightAuto(code,['javascript','java']).language);
-          return require('highlight.js').highlightAuto(code,['javascript','java']).value;
+          return require('highlight.js').highlightAuto(code,['javascript','java','Bash']).value;
         }
       })
       return marked(this.input, { sanitize: true })

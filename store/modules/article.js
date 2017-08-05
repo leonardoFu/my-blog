@@ -17,7 +17,7 @@ const getters = {
 
 
 const actions = {
-  initList({commit,state},param){
+  initList({commit, state},param){
     let page = param.page || 1;
     let classId = param.clsId || '';
     return articleApis.getList(page, classId).then((result) => {
@@ -27,10 +27,18 @@ const actions = {
       return result;
     })
   },
-  initClasses({commit,state}){
+  initClasses({commit, state}){
     return articleApis.getClasses().then((result) => {
       if(result.error_code === 200){
         commit(types.INIT_ARTICLE_CLASS,result.data);
+      }
+      return result;
+    })
+  },
+  initArticle({ commit, state }, id){
+    return articleApis.getOne(id).then((result) => {
+      if(result.error_code === 200){
+        commit(types.INIT_ARTICLE_DETAIL, result.data);
       }
       return result;
     })
@@ -44,6 +52,9 @@ const mutations = {
   },
   [types.INIT_ARTICLE_CLASS](state, data){
     state.articleCls = data;
+  },
+  [types.INIT_ARTICLE_DETAIL](state, data){
+    state.currentArticle = data;
   }
 }
 
