@@ -1,5 +1,5 @@
 <template lang="html">
-  <li class = "articles-item animated fadeInUp">
+  <li class = "articles-item">
     <h2><router-link class = "article-item-title":to = "linkToOne">{{ article.title }}</router-link></h2>
     <div class = "articles-item-info">
       发布于：{{ createdTime }} | 分类：<router-link class = "black" :to = "linkToCls">{{ article.class.name }}({{ article.class.count }})</router-link> |

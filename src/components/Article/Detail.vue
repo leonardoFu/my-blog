@@ -1,5 +1,5 @@
 <template lang="html">
-  <article class="article-container">
+  <article v-if = "currentArticle.content" class="article-container">
     <div class="article-head">
       <h1>{{currentArticle.title}}</h1>
       发布于{{createdTime}} | 分类:
@@ -71,12 +71,23 @@ export default {
 </script>
 
 <style lang="less">
+  @keyframes artiFadeIn{
+    from {
+      opacity: 0;
+      transform: translate(0, -20px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
   .article-container{
-    width: 45%;
+    width: 50%;
     margin: 0 auto;
     min-height: 500px;
     padding-top: 50px;
     text-align: left;
+    animation: artiFadeIn .5s;
     & h2{
       padding-bottom: 10px;
       border-bottom: 1px dashed #ccc;
@@ -94,6 +105,7 @@ export default {
       color: #000;
     }
   }
+
   .article-body{
     &>h2{
       font-size: 30px;
@@ -105,10 +117,16 @@ export default {
       list-style: inherit;
       border-radius: 5px;
     }
-    code{
+    p>code{
+      background: #fdf6e3;
+      padding: 3px;
+      border-radius: 3px;
+    }
+    pre>code{
       font-size: 16px;
       line-height: 22px;
       border-radius: 5px;
+      padding: 15px;
     }
     ol{
       background: #fdf6e3;

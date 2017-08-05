@@ -1,10 +1,9 @@
 <template lang="html">
     <el-row type = "flex" class="articles">
-
       <el-col  :md = "20" :lg = "{span: 16, offset: 4}">
         <div class = "articles-main">
           <h3 class = "articles-title">{{ currentClsName }}({{ articlesTotal }})</h3>
-          <ul class = "articles-list ">
+          <ul v-if = "showList" class = "articles-list ">
             <ListItem v-for = "article in articles" :article = "article"></ListItem>
           </ul>
           <el-pagination class = "articles-pagination"
@@ -22,6 +21,11 @@
               <span >文章分类</span>
             </div>
             <ul class = "class-list">
+              <li>
+                <router-link :to = "'/articles'">
+                  全部
+                </router-link>
+              </li>
               <li v-for = "cls in articleCls" >
                 <router-link :to = "'/articles/'+cls.id">
                   {{cls.name+'('+cls.count+')'}}
@@ -38,6 +42,11 @@
 import { mapGetters, mapActions } from 'vuex';
 import ListItem from './ListItem.vue';
 export default {
+  data(){
+    return {
+      showList: false
+    }
+  },
   created(){
     this.fetchListData();
     this.fetchClsData();
@@ -53,9 +62,12 @@ export default {
     ]),
     fetchListData(){
       let clsId = this.$route.params.id;
+      this.showList = false;
       this.initList({
         page: 1,
         clsId
+      }).then(() => {
+        this.showList = true;
       });
       return this;
     },
@@ -90,6 +102,7 @@ export default {
 </script>
 
 <style lang="less">
+
   .articles{
     width: 70%;
     max-width: 1400px;
@@ -102,6 +115,7 @@ export default {
     display: flex;
     justify-content: flex-end;
     flex-direction: column;
+    animation: artiFadeIn .5s;
   }
   .articles-main{
   }
@@ -134,10 +148,10 @@ export default {
   .articles-right{
     margin-top: 50px;
     margin-left:10px;
-  }
-  .articles-classes{
-    min-height: 50px;
-    box-shadow: 0 0 3px 3px #ccc;
+    .articles-classes{
+      min-height: 50px;
+      box-shadow: none;
+    }
   }
   .class-list{
     padding-left: 1.5em;
