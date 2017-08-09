@@ -5,6 +5,7 @@ const state = {
   articles: [],
   total: 0,
   currentArticle: {},
+  currentRefer: {},
   articleCls: []
 }
 
@@ -12,11 +13,21 @@ const getters = {
   articleCls: state => state.articleCls,
   articles: state => state.articles,
   articlesTotal: state => state.total,
-  currentArticle: state => state.currentArticle
+  currentArticle: state => state.currentArticle,
+  currentRefer: state => state.currentRefer
 }
 
 
 const actions = {
+  comment({ commit, state }, newComment){
+    return articleApis.addComment(newComment).then((result) => {
+      if(result.error_code === 200){
+        commit(types.INIT_ARTICLE_DETAIL, result.data);
+        commit(types.REFER_COMMENT, {});
+      }
+      return result;
+    })
+  },
   initList({commit, state},param){
     let page = param.page || 1;
     let classId = param.clsId || '';
@@ -55,6 +66,9 @@ const mutations = {
   },
   [types.INIT_ARTICLE_DETAIL](state, data){
     state.currentArticle = data;
+  },
+  [types.REFER_COMMENT](state, data){
+    state.currentRefer = data;
   }
 }
 

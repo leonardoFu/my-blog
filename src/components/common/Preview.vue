@@ -9,6 +9,10 @@
 </template>
 
 <script>
+/**
+ * 预览弹窗，针对上传的图片进行预览
+ * @type {Object}
+ */
 export default {
   data(){
     return{};

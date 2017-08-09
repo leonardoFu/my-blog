@@ -3,9 +3,11 @@
       <el-col  :md = "20" :lg = "{span: 16, offset: 4}">
         <div class = "articles-main">
           <h3 class = "articles-title">{{ currentClsName }}({{ articlesTotal }})</h3>
-          <ul v-if = "showList" class = "articles-list ">
-            <ListItem v-for = "article in articles" :article = "article"></ListItem>
-          </ul>
+          <div style = "min-height: 200px;">
+            <ul v-if = "showList" class = "articles-list ">
+              <ListItem v-for = "article in articles" :article = "article"></ListItem>
+            </ul>
+          </div>
           <el-pagination class = "articles-pagination"
             small
             layout = "prev, pager, next"
@@ -48,12 +50,14 @@ export default {
     }
   },
   created(){
-    this.fetchListData();
-    this.fetchClsData();
+    this.fetchListData().then(() => {
+      this.fetchClsData();
+    });
   },
   beforeMount(){
-    this.fetchListData();
-    this.fetchClsData();
+    // this.fetchListData().then(() => {
+    //   this.fetchClsData();
+    // });
   },
   methods: {
     ...mapActions([
@@ -63,13 +67,12 @@ export default {
     fetchListData(){
       let clsId = this.$route.params.id;
       this.showList = false;
-      this.initList({
+      return this.initList({
         page: 1,
         clsId
       }).then(() => {
         this.showList = true;
       });
-      return this;
     },
     fetchClsData(){
       this.initClasses().catch((e) => {
@@ -92,7 +95,13 @@ export default {
     }
   },
   watch:{
-    '$route': 'fetchListData'
+    '$route': {
+      handler(curVal, oldVal){
+        if(!curVal.hash){
+          this.fetchListData();
+        }
+      }
+    }
   },
   components:{
     ListItem
@@ -118,6 +127,7 @@ export default {
     animation: artiFadeIn .5s;
   }
   .articles-main{
+    position: relative;
   }
   .articles-title{
     margin-left: 45px;
@@ -125,6 +135,7 @@ export default {
   }
   .articles-pagination{
     text-align: right;
+
      .el-pager .number{
        height: 30px;
        line-height: 30px;

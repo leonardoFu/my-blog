@@ -14,9 +14,10 @@
       </div>
       <h2>正文</h2>
       <div v-html = "compiledMarkdown">
-
       </div>
     </div>
+    <Comments :comments = "currentArticle.comments || []"></Comments>
+    <BackToTop></BackToTop>
   </article>
 </template>
 
@@ -24,6 +25,8 @@
 import { mapGetters, mapActions } from 'vuex';
 import marked from 'marked';
 import highlightStyle from 'highlight.js/styles/solarized-light.css';
+import Comments from '@/components/common/Comment/List';
+import BackToTop from '@/components/common/ToTop.vue';
 export default {
   name: 'article-detail',
   created(){
@@ -66,6 +69,10 @@ export default {
       })
       return marked(this.currentArticle.content || '', { sanitize: true })
     }
+  },
+  components: {
+    Comments,
+    BackToTop
   }
 }
 </script>
@@ -115,7 +122,7 @@ export default {
       padding: 7px 0;
       line-height: 24px;
       list-style: inherit;
-      border-radius: 5px;
+      border-radius: 10px;
     }
     p>code{
       background: #fdf6e3;
@@ -125,11 +132,12 @@ export default {
     pre>code{
       font-size: 16px;
       line-height: 22px;
-      border-radius: 5px;
+      border-radius: 10px;
       padding: 15px;
     }
     ol{
       background: #fdf6e3;
+      border-radius: 10px;
     }
     p{
       padding: 10px 0;

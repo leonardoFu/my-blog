@@ -7,24 +7,23 @@ const getList = (pageNum,classId) => {
   }
   if (classId) params.classId = classId;
 
-  return ajax.getWithCookie(`${SERVER}/articles/list`, params).then((result) => {
-    return JSON.parse(result);
-  })
+  return ajax.getWithCookie(`${SERVER}/articles/list`, params).then(ajax.parseJSON)
 }
 
 const getClasses = () => {
-  return ajax.getWithCookie(`${SERVER}/articles/classes`).then((result) => {
-    return JSON.parse(result);
-  })
+  return ajax.getWithCookie(`${SERVER}/articles/classes`).then(ajax.parseJSON)
 }
 
 const getOne = (id) => {
-  return ajax.getWithCookie(`${SERVER}/articles/article/${id}`).then((result) => {
-    return JSON.parse(result);
-  })
+  return ajax.getWithCookie(`${SERVER}/articles/article/${id}`).then(ajax.parseJSON)
+}
+
+const addComment = (newComment) => {
+  return ajax.postWithCookie(`${SERVER}/articles/comment`, newComment).then(ajax.parseJSON)
 }
 export default {
   getList,
   getClasses,
-  getOne
+  getOne,
+  addComment
 }

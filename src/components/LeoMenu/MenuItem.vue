@@ -9,11 +9,11 @@ export default {
   name:'menu-item',
   props:{
       data:{
-        type:Object,
-        required:true,
+        type: Object,
+        required: true,
       }
   },
-  
+
   methods:{
     handleClick:function(){
 

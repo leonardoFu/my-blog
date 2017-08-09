@@ -1,4 +1,4 @@
-import {ajax} from 'jquery';
+import { ajax } from 'jquery';
 const myAjax = {
   send(option){
     return ajax(option);
@@ -28,7 +28,7 @@ const myAjax = {
       method,
       data,
       success(result){
-        onSuccess = onSuccess||function(){};
+        onSuccess = onSuccess || function(){};
         try {
           objResult = JSON.parse(result);
         } catch(e) {
@@ -47,5 +47,8 @@ export default {
   getWithCookie:myAjax.reqConstructor.bind(myAjax,'GET'),
   postWithCookie:myAjax.reqConstructor.bind(myAjax,'POST'),
   putWithCookie:myAjax.reqConstructor.bind(myAjax,'PUT'),
-  delWithCookie:myAjax.reqConstructor.bind(myAjax,'DELETE')
+  delWithCookie:myAjax.reqConstructor.bind(myAjax,'DELETE'),
+  parseJSON(result){
+    return JSON.parse(result);
+  }
 }
