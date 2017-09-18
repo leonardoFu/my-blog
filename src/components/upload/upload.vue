@@ -20,7 +20,6 @@ export default {
   },
   methods:{
     uploadSuccess:()=>{
-       console.log(this.fileList);
     }
   }
 }

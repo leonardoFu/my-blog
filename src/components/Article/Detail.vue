@@ -18,6 +18,9 @@
     </div>
     <Comments :comments = "currentArticle.comments || []"></Comments>
     <BackToTop></BackToTop>
+    <el-dialog title = "预览图片" :visible.sync = "showPreviewer" height = "500px" size = "large">
+      <img style = "display: table; margin: 0 auto;" :src="imgSrc">
+    </el-dialog>
   </article>
 </template>
 
@@ -27,15 +30,53 @@ import marked from 'marked';
 import highlightStyle from 'highlight.js/styles/solarized-light.css';
 import Comments from '@/components/common/Comment/List';
 import BackToTop from '@/components/common/ToTop.vue';
+import sessionMgr from 'utils/sessionMgr';
+import $ from 'jquery';
 export default {
   name: 'article-detail',
+  data(){
+    return {
+      images:'',
+      showPreviewer: false,
+      imgSrc: ''
+    }
+  },
   created(){
     this.initArticle(this.$route.params.id);
+  },
+  updated(){
+    Array.from($('img')).forEach((v, index) => {
+        $(v).click(() => {
+          this.showPreviewer = true;
+          this.imgIndex = index;
+        })
+    })
+  },
+  mounted(){
+    let urlList = [];
+    Array.from($('img')).forEach((v, index) => {
+        $(v).click((e) => {
+          let imgSrc = $(e.target).attr('src');
+          this.showPreviewer = true;
+          this.imgSrc = imgSrc;
+        })
+        urlList.push($(v).attr('src'))
+    })
+
+    if(sessionMgr.get('imageList')){
+      this.images = sessionMgr.get('imageList');
+    } else {
+      this.images = urlList.toString();
+      sessionMgr.set('imageList', urlList.toString());
+    }
   },
   methods: {
     ...mapActions([
       'initArticle'
-    ])
+    ]),
+    initImgPreview(){
+
+    }
   },
   computed: {
     ...mapGetters([
@@ -72,7 +113,7 @@ export default {
   },
   components: {
     Comments,
-    BackToTop
+    BackToTop,
   }
 }
 </script>
@@ -142,6 +183,11 @@ export default {
     p{
       padding: 10px 0;
       line-height: 24px;
+    }
+    img{
+      max-width: 80%;
+      margin-top: 10px;
+      margin-left: 10%;
     }
   }
 </style>

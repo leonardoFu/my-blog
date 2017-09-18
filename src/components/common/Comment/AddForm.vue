@@ -15,7 +15,16 @@
       </el-form-item>
       <el-form-item>
         <el-button class = "comment-submit" type="primary" @click="submit">提交</el-button>
-        <el-checkbox v-if = "currentRefer.id" :true-label="1" :false-label="0" v-model = "formData.isRefer">引用{{currentRefer.username}}的发言</el-checkbox>
+        <el-checkbox
+         v-if = "currentRefer.id"
+         :true-label="1"
+         :false-label="0"
+         v-model = "formData.isRefer"
+        >
+          引用
+          <span class="refer-username">{{currentRefer.username}}</span>
+          的发言
+        </el-checkbox>
       </el-form-item>
     </el-form>
   </div>
@@ -102,6 +111,9 @@ export default {
    textarea{
      width: 800px;
    }
+ }
+ .refer-username{
+   font-weight: 700;
  }
  .comment-submit{
    margin-right: 20px;

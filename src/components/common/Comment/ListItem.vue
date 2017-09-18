@@ -19,6 +19,7 @@
 
 <script>
 import types from 'constants/mutation_types';
+import $ from 'jquery';
 export default {
   name: 'comment',
   props: {
@@ -30,6 +31,7 @@ export default {
   methods: {
     referThis(){
       this.$store.commit(types['REFER_COMMENT'], this.data);
+      $(window).scrollTop($('.comment-add').offset().top);
     }
   },
   computed: {

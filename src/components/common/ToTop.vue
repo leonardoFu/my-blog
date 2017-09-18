@@ -53,7 +53,7 @@ export default {
   },
   methods: {
     backToTop(){
-      $(window).scrollTop(0);
+      $('body').animate({scrollTop: 0}, 500);
     }
   }
 }

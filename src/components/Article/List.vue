@@ -5,7 +5,7 @@
           <h3 class = "articles-title">{{ currentClsName }}({{ articlesTotal }})</h3>
           <div style = "min-height: 200px;">
             <ul v-if = "showList" class = "articles-list ">
-              <ListItem v-for = "article in articles" :article = "article"></ListItem>
+              <ListItem v-for = "article in articles" key="{{ article.id }}" :article = "article"></ListItem>
             </ul>
           </div>
           <el-pagination class = "articles-pagination"
@@ -159,10 +159,6 @@ export default {
   .articles-right{
     margin-top: 50px;
     margin-left:10px;
-    .articles-classes{
-      min-height: 50px;
-      box-shadow: none;
-    }
   }
   .class-list{
     padding-left: 1.5em;

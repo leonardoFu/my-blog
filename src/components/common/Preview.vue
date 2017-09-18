@@ -1,8 +1,20 @@
 <template lang="html">
-  <el-dialog :title="title" :visible="visible" :size ="size" :before-close = "handleClose">
-    <el-carousel :height = "height" indicator-position="outside">
-      <el-carousel-item v-for="image in imageList" :key="image">
-        <img :src="image" alt="" :width = "imgWidth" :height = "height" >
+  <el-dialog :title="title"
+   :visible="visible"
+   :size ="size"
+   :before-close = "handleClose">
+    <el-carousel :height = "containerH"
+    :autoplay = "false"
+    :arrow = "arrow || 'never'"
+    :initial-index = "index || 0"
+    indicator-position="outside">
+      <el-carousel-item v-for="image in imageList"
+
+      :key="image">
+        <img :src="image"
+        alt=""
+        :width = "imgWidth"
+        :height = "height" >
       </el-carousel-item>
     </el-carousel>
  </el-dialog>
@@ -18,21 +30,30 @@ export default {
     return{};
   },
   props:{
-    images:{
+    images: {
       type: String,
       required: true
     },
-    visible:{
-      type:Boolean
+    visible: {
+      type: Boolean
     },
-    size:{
-      type:String
+    size: {
+      type: String
     },
-    height:{
-      type:String
+    height: {
+      type: String
     },
-    title:{
-      type:String
+    width: {
+      type: String
+    },
+    title: {
+      type: String
+    },
+    arrow: {
+      type: String
+    },
+    index: {
+      type: Number
     }
   },
   methods:{
@@ -43,19 +64,19 @@ export default {
   },
   computed:{
     imageList(){
+      if(Object.prototype.toString.call(this.images)=='[object Array]'){
+        return this.images;
+      }
       return this.images.split(',');
     },
     imgWidth(){
-      switch(this.size){
-        case 'tiny':
-          return '530'
-      }
+      return this.height || '530';
     },
     imgHeight(){
-      switch(this.size){
-        case 'tiny':
-          return '300'
-      }
+      return this.width || '300';
+    },
+    containerH(){
+      return `${this.height || 300}px`
     }
   }
 }

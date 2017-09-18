@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import define from '@/assets/css/default.less';
+import define from '@/assets/css/index.less';
 import Menu from './components/LeoMenu/LeoMenu.vue';
 import UserBar from './components/User/UserBar.vue';
 export default {

@@ -2,7 +2,7 @@
 <div class="comments">
   <h2>留言（共{{comments.length}}条）</h2>
   <ul class = "comment-list">
-    <ListItem v-for = "comment in comments" :data = "comment">
+    <ListItem v-for = "comment in comments" key="{{ comment.id }}" :data = "comment">
     </ListItem>
   </ul>
   <h2>说说您的看法</h2>
