@@ -1,4 +1,4 @@
-import Vue from 'vue'
+port Vue from 'vue'
 import Hello from '@/components/Hello'
 
 describe('Hello.vue', () => {
